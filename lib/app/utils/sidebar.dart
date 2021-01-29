@@ -43,8 +43,14 @@ class _SideBarState extends State<SideBar> {
           children: <Widget>[
             Padding(
               padding: const EdgeInsets.only(top: 8.0),
-              child: CircleAvatar(
-                child: Icon(Icons.person),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text('Sinaliza',
+                      style: TextStyle(color: Colors.white, fontSize: 12)),
+                  Text('Vendas',
+                      style: TextStyle(color: Colors.white, fontSize: 12)),
+                ],
               ),
             ),
             SizedBox(

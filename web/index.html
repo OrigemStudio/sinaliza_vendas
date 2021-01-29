@@ -30,9 +30,24 @@
   <link rel="manifest" href="manifest.json">
 </head>
 <body>
-  <!-- This script installs service_worker.js to provide PWA functionality to
-       application. For more information, see:
-       https://developers.google.com/web/fundamentals/primers/service-workers -->
+  <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-analytics.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.20.0/init.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-auth.js"></script>
+  <script>
+    var firebaseConfig = {
+      apiKey: "AIzaSyCBUOZu4AJxo7yvwNnKfESgu9YyCCuqVVM",
+      authDomain: "sinaliza-vendas.firebaseapp.com",
+      projectId: "sinaliza-vendas",
+      storageBucket: "sinaliza-vendas.appspot.com",
+      messagingSenderId: "73883714343",
+      appId: "1:73883714343:web:162cc7b0c91e644a261f02",
+      measurementId: "G-3Z18Y97NNR"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+  </script>
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('flutter-first-frame', function () {
@@ -40,6 +55,6 @@
       });
     }
   </script>
-  <script src="main.dart.js" type="application/javascript"></script>
+  <script src="main.dart.js"></script>
 </body>
 </html>
