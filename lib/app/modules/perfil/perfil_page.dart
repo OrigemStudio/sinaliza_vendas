@@ -12,18 +12,7 @@ class _PerfilPageState extends State<PerfilPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Perfil'),
-      ),
-      body: Center(
-        child: RaisedButton(
-            child: Text('Sair'),
-            onPressed: () async {
-              final _auth = FirebaseAuth.instance;
-              await _auth.signOut();
-              Get.off(LoginPage());
-            }),
-      ),
+
     );
   }
 }

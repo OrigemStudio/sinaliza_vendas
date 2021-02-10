@@ -8,6 +8,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'Sinaliza Vendas',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.purple,
       ),

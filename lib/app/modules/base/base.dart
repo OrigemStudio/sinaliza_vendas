@@ -3,6 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sinaliza_vendas/app/modules/base/bloc/base_bloc.dart';
 import 'package:sinaliza_vendas/app/modules/base/bloc/base_state.dart';
 import 'package:sinaliza_vendas/app/modules/clientes/clientes_page.dart';
+import 'package:sinaliza_vendas/app/modules/control_vendas/control_vendas_page.dart';
+import 'package:sinaliza_vendas/app/modules/destaques/destaque_page.dart';
+import 'package:sinaliza_vendas/app/modules/expansions/expansion_page.dart';
 import 'package:sinaliza_vendas/app/modules/home/home_page.dart';
 import 'package:sinaliza_vendas/app/modules/perfil/perfil_page.dart';
 import 'package:sinaliza_vendas/app/utils/sidebar.dart';
@@ -13,7 +16,15 @@ class Base extends StatefulWidget {
 }
 
 class _BaseState extends State<Base> {
-  List widgetOptions = [HomePage(), ClientesPage(), PerfilPage()];
+  List widgetOptions = [
+    HomePage(),
+    ClientesPage(),
+    ControlVendasPage(),
+    PerfilPage(),
+    ExpansionPage(),
+    DestaquesPage()
+  ];
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<BaseBloc, BaseState>(builder: (_, state) {

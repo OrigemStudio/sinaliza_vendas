@@ -1,4 +1,5 @@
 class BaseState {
   int currentPage;
-  BaseState({this.currentPage});
+  bool isClose;
+  BaseState({this.currentPage, this.isClose});
 }

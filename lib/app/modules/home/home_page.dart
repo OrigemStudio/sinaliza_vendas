@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -8,46 +9,68 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.init(context,
+        designSize: Size(750, 1334), allowFontScaling: true);
+    var height = MediaQuery.of(context).size.height;
+    var width = MediaQuery.of(context).size.height;
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        title: Text(
-          'Sinaliza Vendas',
-          style: TextStyle(color: Colors.black),
-        ),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Center(
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    card('Meus clientes', '78'),
-                    card('Clientes atendidos neste mês', '52')
-                  ],
-                ),
+        backgroundColor: Colors.grey[400],
+        body: ListView(
+          shrinkWrap: true,
+          children: [
+            Container(
+              margin: EdgeInsets.only(
+                top: height *.05,
+                  left: width *.70,
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    card('Minha renda', 'R\$ 4700,00'),
-                    card('Novos clientes no mês', '8'),
-                  ],
-                ),
-              )
-            ],
-          ),
-        ),
-      ),
-    );
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      Container(
+                        height: height *.45,
+                        width: width *.60,
+                        margin: EdgeInsets.only(
+                          right: width *.030
+                        ),
+                        decoration: BoxDecoration(
+                          color: Color(0xff352238),
+                          borderRadius: BorderRadius.all(Radius.circular(12)),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.5),
+                              spreadRadius: 2,
+                              blurRadius: 5,
+                              offset:
+                                  Offset(6, 3), // changes position of shadow
+                            ),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        height: height *.45,
+                        width: width *.60,
+                        decoration: BoxDecoration(
+                          color: Color(0xff352238),
+                          borderRadius: BorderRadius.all(Radius.circular(12)),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.5),
+                              spreadRadius: 2,
+                              blurRadius: 5,
+                              offset:
+                                  Offset(6, 3), // changes position of shadow
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  )
+                ],
+              ),
+            ),
+          ],
+        ));
   }
 
   Widget card(String text, String value) {
