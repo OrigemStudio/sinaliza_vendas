@@ -18,7 +18,6 @@ class SideBar extends StatefulWidget {
 }
 
 class _SideBarState extends State<SideBar> {
-
   List<PageModel> listPages = [
     PageModel('Área do Representante', Icons.home),
     PageModel('Representantes', Icons.people),
@@ -44,16 +43,15 @@ class _SideBarState extends State<SideBar> {
               itemCount: listPages.length,
               itemBuilder: (_, i) {
                 Color iconColor =
-                (state.currentPage == i) ? Colors.blue : Colors.white;
+                    (state.indexPage == i) ? Colors.blue : Colors.white;
                 Color letraColor =
-                (state.currentPage == i) ? Colors.white : Colors.white;
-                Color fundoColor = (state.currentPage == i)
-                    ? Color(0xff6C0087)
-                    : Colors.purple;
+                    (state.indexPage == i) ? Colors.white : Colors.white;
+                Color fundoColor =
+                    (state.indexPage == i) ? Color(0xff6C0087) : Colors.purple;
                 return GestureDetector(
                   onTap: () {
                     BlocProvider.of<BaseBloc>(context)
-                        .add(UpdateEvent(value: i));
+                        .add(UpdatePage(indexPage: i));
                   },
                   child: page(listPages[i].page, listPages[i].icon, iconColor,
                       letraColor, fundoColor),
@@ -67,9 +65,8 @@ class _SideBarState extends State<SideBar> {
   Widget page(String page, IconData icon, Color iconColor, Color letraColor,
       Color fundoColor) {
     return Padding(
-      padding: EdgeInsets.only(
-        bottom: MediaQuery.of(context).size.height *.005
-      ),
+      padding:
+          EdgeInsets.only(bottom: MediaQuery.of(context).size.height * .005),
       child: Container(
         color: fundoColor,
         height: 50,
@@ -81,21 +78,19 @@ class _SideBarState extends State<SideBar> {
               alignment: Alignment.center,
               child: Container(
                   margin: EdgeInsets.only(
-                      top: MediaQuery.of(context).size.width *.004,
-                      left: MediaQuery.of(context).size.width *.008
-                  ),
-                  child: Icon(
-                      icon, color: iconColor)),
+                      top: MediaQuery.of(context).size.width * .004,
+                      left: MediaQuery.of(context).size.width * .008),
+                  child: Icon(icon, color: iconColor)),
             ),
-            isOpen ? Container(
-              margin: EdgeInsets.only(
-                top: MediaQuery.of(context).size.width *.008,
-                left: MediaQuery.of(context).size.width *.005
-              ),
-                child: Center(
-                    child: Text(page,
-                        style: TextStyle(color: letraColor, fontSize: 16)))) :
-                Container(),
+            isOpen
+                ? Container(
+                    margin: EdgeInsets.only(
+                        top: MediaQuery.of(context).size.width * .008,
+                        left: MediaQuery.of(context).size.width * .005),
+                    child: Center(
+                        child: Text(page,
+                            style: TextStyle(color: letraColor, fontSize: 16))))
+                : Container(),
           ],
         ),
       ),
@@ -129,13 +124,12 @@ class _SideBarState extends State<SideBar> {
                     Container(
                         width: 50,
                         padding: EdgeInsets.only(
-                          top: MediaQuery.of(context).size.height *.01,
+                          top: MediaQuery.of(context).size.height * .01,
                         ),
                         margin: EdgeInsets.only(
-                          right: MediaQuery.of(context).size.width *.005,
+                          right: MediaQuery.of(context).size.width * .005,
                         ),
-                        child: Image.asset('assets/sinaliza_notification.png')
-                    ),
+                        child: Image.asset('assets/sinaliza_notification.png')),
                     Text('Sinaliza Vendas',
                         style: TextStyle(color: Colors.white, fontSize: 22)),
                   ],
@@ -143,39 +137,33 @@ class _SideBarState extends State<SideBar> {
               ),
               Container(
                 color: Colors.blue,
-                height: MediaQuery.of(context).size.height *.003,
+                height: MediaQuery.of(context).size.height * .003,
                 margin: EdgeInsets.only(
-                    top: MediaQuery.of(context).size.width *.012,
-                    bottom: MediaQuery.of(context).size.width *.012,
-                    left: MediaQuery.of(context).size.width *.002,
-                    right: MediaQuery.of(context).size.width *.002
-                ),
+                    top: MediaQuery.of(context).size.width * .012,
+                    bottom: MediaQuery.of(context).size.width * .012,
+                    left: MediaQuery.of(context).size.width * .002,
+                    right: MediaQuery.of(context).size.width * .002),
                 padding: EdgeInsets.only(
-                    top: MediaQuery.of(context).size.width *.004,
-                    left: MediaQuery.of(context).size.width *.002,
-                    right: MediaQuery.of(context).size.width *.002
-                ),
+                    top: MediaQuery.of(context).size.width * .004,
+                    left: MediaQuery.of(context).size.width * .002,
+                    right: MediaQuery.of(context).size.width * .002),
               ),
               Expanded(
                 flex: 90,
-                child: Align(
-                    alignment: Alignment.topCenter,
-                    child: pages()),
+                child: Align(alignment: Alignment.topCenter, child: pages()),
               ),
               Container(
                 color: Colors.blue,
-                height: MediaQuery.of(context).size.height *.003,
+                height: MediaQuery.of(context).size.height * .003,
                 margin: EdgeInsets.only(
-                    top: MediaQuery.of(context).size.width *.012,
-                    bottom: MediaQuery.of(context).size.width *.012,
-                    left: MediaQuery.of(context).size.width *.002,
-                    right: MediaQuery.of(context).size.width *.002
-                ),
+                    top: MediaQuery.of(context).size.width * .012,
+                    bottom: MediaQuery.of(context).size.width * .012,
+                    left: MediaQuery.of(context).size.width * .002,
+                    right: MediaQuery.of(context).size.width * .002),
                 padding: EdgeInsets.only(
-                    top: MediaQuery.of(context).size.width *.004,
-                    left: MediaQuery.of(context).size.width *.002,
-                    right: MediaQuery.of(context).size.width *.002
-                ),
+                    top: MediaQuery.of(context).size.width * .004,
+                    left: MediaQuery.of(context).size.width * .002,
+                    right: MediaQuery.of(context).size.width * .002),
               ),
               Expanded(
                 flex: 10,
@@ -183,9 +171,8 @@ class _SideBarState extends State<SideBar> {
                     alignment: Alignment.bottomLeft,
                     child: Padding(
                       padding: EdgeInsets.only(
-                        left: MediaQuery.of(context).size.width *.005,
-                          bottom: MediaQuery.of(context).size.height *.02
-                      ),
+                          left: MediaQuery.of(context).size.width * .005,
+                          bottom: MediaQuery.of(context).size.height * .02),
                       child: buttomClose(),
                     )),
               )
@@ -212,30 +199,25 @@ class _SideBarState extends State<SideBar> {
               Container(
                 height: 90,
                 padding: EdgeInsets.only(
-                    top: MediaQuery.of(context).size.height *.01,
-                    left: MediaQuery.of(context).size.width *.005
-                ),
+                    top: MediaQuery.of(context).size.height * .01,
+                    left: MediaQuery.of(context).size.width * .005),
                 child: Center(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('15/02/2023',
+                      Text(
+                        '15/02/2023',
                         textAlign: TextAlign.start,
-                        style: TextStyle(
-                            fontSize: 25,
-                            color: Colors.white
-                        ),
+                        style: TextStyle(fontSize: 25, color: Colors.white),
                       ),
                       Divider(
                         color: Colors.transparent,
-                        height: MediaQuery.of(context).size.height *.001,
+                        height: MediaQuery.of(context).size.height * .001,
                       ),
-                      Text('17:36:12',
+                      Text(
+                        '17:36:12',
                         textAlign: TextAlign.start,
-                        style: TextStyle(
-                            fontSize: 25,
-                            color: Colors.white
-                        ),
+                        style: TextStyle(fontSize: 25, color: Colors.white),
                       )
                     ],
                   ),
@@ -254,51 +236,55 @@ class _SideBarState extends State<SideBar> {
     return Wrap(
       children: [
         BlocBuilder<BaseBloc, BaseState>(builder: (_, state) {
-          if (state.currentPage == 0) {subbar.listSubPage = subbar.listHomePage;
-          } else if(state.currentPage == 2 ){}
+          if (state.indexPage == 0) {
+            subbar.listSubPage = subbar.listHomePage;
+          } else if (state.indexPage == 1) {
+            subbar.listSubPage = subbar.listReprePage;
+          } else if (state.indexPage == 2) {
+            subbar.listSubPage = subbar.listContratosPage;
+          } else if (state.indexPage == 3) {
+            subbar.listSubPage = subbar.listExpansoesPage;
+          } else if (state.indexPage == 4) {
+            subbar.listSubPage = subbar.listDestaquesPage;
+          }
           return ListView.builder(
               shrinkWrap: true,
               itemCount: subbar.listSubPage.length,
               itemBuilder: (_, i) {
                 Color letraColor =
-                (state.currentPage == i) ? Colors.white : Colors.white;
-                Color fundoColor = (state.currentPage == i)
+                    (state.indexSubPage == i) ? Colors.white : Colors.white;
+                Color fundoColor = (state.indexSubPage == i)
                     ? Color(0xff6C0087)
                     : Colors.purple;
                 return GestureDetector(
                   onTap: () {
                     BlocProvider.of<BaseBloc>(context)
-                        .add(UpdateEvent(value: i));
+                        .add(UpdateSubPage(indexSubPage: i));
                   },
-                  child: subPage(subbar.listSubPage[i],
-                      letraColor, fundoColor),
+                  child: subPage(subbar.listSubPage[i], letraColor, fundoColor),
                 );
-
               });
         }),
       ],
     );
   }
 
-  Widget subPage(String subpage, Color letraColor,
-      Color fundoColor) {
+  Widget subPage(String subpage, Color letraColor, Color fundoColor) {
     return Container(
         color: fundoColor,
         height: 40,
         width: 50,
         margin: EdgeInsets.only(
-            top: MediaQuery.of(context).size.width *.004,
-            left: MediaQuery.of(context).size.width *.002,
-          right: MediaQuery.of(context).size.width *.005
-        ),
+            top: MediaQuery.of(context).size.width * .004,
+            left: MediaQuery.of(context).size.width * .002,
+            right: MediaQuery.of(context).size.width * .005),
         padding: EdgeInsets.only(
-          top: MediaQuery.of(context).size.width *.006,
-            left: MediaQuery.of(context).size.width *.006,
+          top: MediaQuery.of(context).size.width * .006,
+          left: MediaQuery.of(context).size.width * .006,
         ),
         child: Text(subpage,
             textAlign: TextAlign.start,
-            style: TextStyle(color: letraColor, fontSize: 16))
-    );
+            style: TextStyle(color: letraColor, fontSize: 16)));
   }
 
   Widget drawerClose() {
@@ -312,7 +298,7 @@ class _SideBarState extends State<SideBar> {
         children: [
           Container(
             decoration: BoxDecoration(
-                color: Colors.purple,
+              color: Colors.purple,
               boxShadow: [
                 BoxShadow(
                   color: Colors.black.withOpacity(0.5),
@@ -329,47 +315,39 @@ class _SideBarState extends State<SideBar> {
                 Align(
                   alignment: Alignment.topCenter,
                   child: Padding(
-                    padding: EdgeInsets.only(
-                        top: MediaQuery.of(context).size.height *.01
-                    ),
-                    child: Image.asset('assets/sinaliza_notification.png')
-                  ),
+                      padding: EdgeInsets.only(
+                          top: MediaQuery.of(context).size.height * .01),
+                      child: Image.asset('assets/sinaliza_notification.png')),
                 ),
                 Container(
                   color: Colors.blue,
-                  height: MediaQuery.of(context).size.height *.003,
+                  height: MediaQuery.of(context).size.height * .003,
                   margin: EdgeInsets.only(
-                    top: MediaQuery.of(context).size.width *.012,
-                    bottom: MediaQuery.of(context).size.width *.012,
-                    left: MediaQuery.of(context).size.width *.002,
-                    right: MediaQuery.of(context).size.width *.002
-                  ),
+                      top: MediaQuery.of(context).size.width * .012,
+                      bottom: MediaQuery.of(context).size.width * .012,
+                      left: MediaQuery.of(context).size.width * .002,
+                      right: MediaQuery.of(context).size.width * .002),
                   padding: EdgeInsets.only(
-                      top: MediaQuery.of(context).size.width *.004,
-                      left: MediaQuery.of(context).size.width *.002,
-                      right: MediaQuery.of(context).size.width *.002
-                  ),
+                      top: MediaQuery.of(context).size.width * .004,
+                      left: MediaQuery.of(context).size.width * .002,
+                      right: MediaQuery.of(context).size.width * .002),
                 ),
                 Expanded(
                   flex: 90,
-                  child: Align(
-                    alignment: Alignment.topCenter,
-                      child: pages()),
+                  child: Align(alignment: Alignment.topCenter, child: pages()),
                 ),
                 Container(
                   color: Colors.blue,
-                  height: MediaQuery.of(context).size.height *.003,
+                  height: MediaQuery.of(context).size.height * .003,
                   margin: EdgeInsets.only(
-                      top: MediaQuery.of(context).size.width *.012,
-                      bottom: MediaQuery.of(context).size.width *.012,
-                      left: MediaQuery.of(context).size.width *.002,
-                      right: MediaQuery.of(context).size.width *.002
-                  ),
+                      top: MediaQuery.of(context).size.width * .012,
+                      bottom: MediaQuery.of(context).size.width * .012,
+                      left: MediaQuery.of(context).size.width * .002,
+                      right: MediaQuery.of(context).size.width * .002),
                   padding: EdgeInsets.only(
-                      top: MediaQuery.of(context).size.width *.004,
-                      left: MediaQuery.of(context).size.width *.002,
-                      right: MediaQuery.of(context).size.width *.002
-                  ),
+                      top: MediaQuery.of(context).size.width * .004,
+                      left: MediaQuery.of(context).size.width * .002,
+                      right: MediaQuery.of(context).size.width * .002),
                 ),
                 Expanded(
                   flex: 10,
@@ -377,8 +355,7 @@ class _SideBarState extends State<SideBar> {
                     alignment: Alignment.bottomCenter,
                     child: Padding(
                       padding: EdgeInsets.only(
-                        bottom: MediaQuery.of(context).size.height *.02
-                      ),
+                          bottom: MediaQuery.of(context).size.height * .02),
                       child: Icon(
                         Icons.menu,
                         color: Colors.white,
@@ -393,9 +370,8 @@ class _SideBarState extends State<SideBar> {
           Container(
             height: double.infinity,
             width: 200,
-            margin: EdgeInsets.only(
-              left: MediaQuery.of(context).size.width *.0
-            ),
+            margin:
+                EdgeInsets.only(left: MediaQuery.of(context).size.width * .0),
             decoration: BoxDecoration(
               color: Color(0xff352238),
               boxShadow: [
@@ -413,38 +389,31 @@ class _SideBarState extends State<SideBar> {
                 Container(
                   height: 90,
                   padding: EdgeInsets.only(
-                    top: MediaQuery.of(context).size.height *.01,
-                    left: MediaQuery.of(context).size.width *.005
-                  ),
+                      top: MediaQuery.of(context).size.height * .01,
+                      left: MediaQuery.of(context).size.width * .005),
                   child: Center(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('15/02/2023',
+                        Text(
+                          '15/02/2023',
                           textAlign: TextAlign.start,
-                          style: TextStyle(
-                            fontSize: 25,
-                            color: Colors.white
-                          ),
+                          style: TextStyle(fontSize: 25, color: Colors.white),
                         ),
                         Divider(
                           color: Colors.transparent,
-                          height: MediaQuery.of(context).size.height *.001,
+                          height: MediaQuery.of(context).size.height * .001,
                         ),
-                        Text('17:36:12',
+                        Text(
+                          '17:36:12',
                           textAlign: TextAlign.start,
-                          style: TextStyle(
-                              fontSize: 25,
-                              color: Colors.white
-                          ),
+                          style: TextStyle(fontSize: 25, color: Colors.white),
                         )
                       ],
                     ),
                   ),
                 ),
-                Container(
-                    child: subPages()
-                    ),
+                Container(child: subPages()),
               ],
             ),
           )

@@ -8,6 +8,7 @@ import 'package:sinaliza_vendas/app/models/clientes_model.dart';
 import 'package:sinaliza_vendas/app/models/endereco_model.dart';
 import 'package:sinaliza_vendas/app/repositories/clientes_repository.dart';
 import 'package:sinaliza_vendas/app/repositories/endereco_repository.dart';
+import 'package:sinaliza_vendas/app/repositories/register_repository.dart';
 
 part 'add_event.dart';
 part 'add_state.dart';
@@ -16,6 +17,7 @@ class AddBloc extends Bloc<AddEvent, AddState> {
   AddBloc() : super(InitialState());
   final ClientesRepository repository = ClientesRepository();
   final EnderecoRepository erepository = EnderecoRepository();
+  final RegisterReposotory rrepository = RegisterReposotory();
   @override
   Stream<AddState> mapEventToState(
     AddEvent event,
@@ -24,6 +26,9 @@ class AddBloc extends Bloc<AddEvent, AddState> {
       yield LoadingState();
       String error = await repository.testeFields(event.cliente);
       if (error == 'ok') {
+        var uid = await rrepository.register(event.cliente.email, 'sinaliza');
+        event.cliente.id = uid;
+        print(event.cliente);
         await repository.setCliente(event.cliente, TipoSet.add);
         Get.back();
       }

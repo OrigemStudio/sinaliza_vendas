@@ -2,6 +2,7 @@ import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sinaliza_vendas/app/models/clientes_model.dart';
 import 'package:sinaliza_vendas/app/modules/clientes/add/add_bloc.dart';
 import 'package:sinaliza_vendas/app/modules/clientes/bloc/clientes_bloc.dart';
 import 'package:sinaliza_vendas/app/repositories/clientes_repository.dart';
@@ -162,7 +163,7 @@ class _AddClientesState extends State<AddClientes> {
 
   Widget button() {
     //ignore: close_sinks
-    final bloc = BlocProvider.of<ClientesBloc>(context);
+    final bloc = BlocProvider.of<AddBloc>(context);
     final repository = RepositoryProvider.of<ClientesRepository>(context);
     return BlocBuilder<AddBloc, AddState>(builder: (context, state) {
       if (state is LoadingState) {
@@ -174,7 +175,10 @@ class _AddClientesState extends State<AddClientes> {
           padding: const EdgeInsets.all(8.0),
           child: RaisedButton(
             onPressed: () {
-              repository.cliente == null ? 'Cadastrar' : 'Editar';
+              ClienteModel clienteModel = ClienteModel();
+              repository.cliente == null
+                  ? bloc.add(AdicionarCliente(cliente: clienteModel))
+                  : bloc.add(EditarCliente(cliente: clienteModel));
             },
             child: Padding(
               padding: const EdgeInsets.all(8.0),

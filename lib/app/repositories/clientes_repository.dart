@@ -83,16 +83,41 @@ class ClientesRepository {
   }
 
   Future<dynamic> setCliente(ClienteModel cliente, TipoSet tipoSet) async {
-    var query = r"""
-      mutation setUser($email:String!,$id:String!){
-        insert_users(objects: {email: $email, id: $id}) {
+    var query;
+    if (tipoSet == TipoSet.add) {
+      query = r"""
+      mutation setCliente($id:String!,$vendedorId:String!,$nome:String!,$email:String!,$telefone:String!,$fantasia:String!,$cpf:String!,$cnpj:String!,$rg:String!,$visita:String!,$cep:String!,$endereco:String!,$numero:String!,$cidade:String!,$estado:String!, $plano:String!) {
+        insert_clientes(objects: {id: $id, vendedor_id: $vendedorId, nome: $nome, email: $email, telefone: $telefone, fantasia: $fantasia, cpf: $cpf, cnpj: $cnpj, rg: $rg, ultima_visita: $visita, cep: $cep, endereco: $endereco, numero: $numero, cidade: $cidade, estado: $estado, plano:$plano}) {
           affected_rows
         }
       }
     """;
+    } else {
+      query = r"""
+      mutation setCliente($id:String!,$vendedorId:String!,$nome:String!,$email:String!,$telefone:String!,$fantasia:String!,$cpf:String!,$cnpj:String!,$rg:String!,$visita:String!,$cep:String!,$endereco:String!,$numero:String!,$cidade:String!,$estado:String!, $plano:String!) {
+        update_clientes(objects: {id: $id, vendedor_id: $vendedorId, nome: $nome, email: $email, telefone: $telefone, fantasia: $fantasia, cpf: $cpf, cnpj: $cnpj, rg: $rg, ultima_visita: $visita, cep: $cep, endereco: $endereco, numero: $numero, cidade: $cidade, estado: $estado, plano:$plano}) {
+          affected_rows
+        }
+      }
+    """;
+    }
     var doc = await _hasuraConnect.mutation(query, variables: {
-      "email": cliente.email,
       "id": cliente.id,
+      "vendedorId": cliente.vendedor,
+      "nome": cliente.nome,
+      "email": cliente.email,
+      "telefone": cliente.telefone,
+      "fantasia": cliente.fantasia,
+      "cpf": cliente.cpf,
+      "cnpj": cliente.cnpj,
+      "rg": cliente.rg,
+      "visita": cliente.visita,
+      "cep": cliente.cep,
+      "endereco": cliente.endereco,
+      "numero": cliente.numero,
+      "cidade": cliente.cidade,
+      "estado": cliente.estado,
+      "plano": cliente.plano
     });
     return doc;
   }
